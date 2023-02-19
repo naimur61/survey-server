@@ -20,8 +20,8 @@ async function run() {
       const questionCollection = client.db('customer_survey').collection('question');
 
       app.post('/survey', async (req, res) => {
-         const surveys = req.body.surveysDetails;
-         const results = await surveyCollection.insertMany(surveys);
+         const surveys = req.body;
+         const results = await surveyCollection.insertOne(surveys);
          res.send(results);
       });
 
@@ -30,6 +30,7 @@ async function run() {
          const result = await questionCollection.find(query).toArray();
          res.send(result)
       })
+
 
    } finally { }
 }
